@@ -17,7 +17,7 @@ namespace TaskManagerApp.Services
             _tasks = LoadTasksFromFile();
             if (_tasks.Any())
             {
-                _currentId = _tasks.Max(t => t.Id) + 1; // Fortsätt från det högsta ID:t
+                _currentId = _tasks.Max(t => t.Id) + 1; 
             }
         }
 
@@ -25,16 +25,15 @@ namespace TaskManagerApp.Services
 
         public TaskItem GetTaskById(int id)
         {
-            // Hämtar task efter ID
             return _tasks.FirstOrDefault(t => t.Id == id);
         }
 
         public void AddTask(TaskItem task)
         {
-            task.Id = _currentId++; // Sätt unikt ID
-            task.CreatedAt = DateTime.Now; // Sätt skapad tid
+            task.Id = _currentId++;
+            task.CreatedAt = DateTime.Now; 
             _tasks.Add(task);
-            SaveTasksToFile(); // Spara till fil
+            SaveTasksToFile();
         }
 
         public void UpdateTask(int id, TaskItem updatedTask)
@@ -44,8 +43,8 @@ namespace TaskManagerApp.Services
             {
                 task.Title = updatedTask.Title;
                 task.IsCompleted = updatedTask.IsCompleted;
-                task.CompletedAt = updatedTask.IsCompleted ? DateTime.Now : null; // Om slutförd, sätt CompletedAt
-                SaveTasksToFile(); // Spara till fil
+                task.CompletedAt = updatedTask.IsCompleted ? DateTime.Now : null; 
+                SaveTasksToFile(); 
             }
         }
 
@@ -55,7 +54,7 @@ namespace TaskManagerApp.Services
             if (task != null)
             {
                 _tasks.Remove(task);
-                SaveTasksToFile(); // Spara till fil
+                SaveTasksToFile();
             }
         }
 
